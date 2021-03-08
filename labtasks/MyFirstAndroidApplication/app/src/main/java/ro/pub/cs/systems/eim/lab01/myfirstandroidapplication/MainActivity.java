@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.view.animation.*;
 
 public class MainActivity extends AppCompatActivity {
 
     final private static long TRANSPARENCY_EFFECT_DURATION = 5000;
 
+    private static Animation initialAnimation = null;
     private ButtonClickListener buttonClickListener = new ButtonClickListener();
 
     private class ButtonClickListener implements Button.OnClickListener {
@@ -23,7 +25,17 @@ public class MainActivity extends AppCompatActivity {
 
             // TODO: exercise 9a
 
+            String greeting = getString(R.string.gretting_text_view_content);
+            greetingTextView.setText(greeting.replace("xxx", "\n"+userNameEditText.getText()));
             // TODO: exercise 9b
+            String name = userNameEditText.getText().toString();
+            if (!name.equals("vio")) {
+                AlphaAnimation fadeEffect = new AlphaAnimation(1.0f, 0.0f);
+                fadeEffect.setDuration(TRANSPARENCY_EFFECT_DURATION);
+                fadeEffect.setFillAfter(true);
+                greetingTextView.setAnimation(fadeEffect);
+            }
+
         }
 
     }
